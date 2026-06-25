@@ -49,6 +49,14 @@ flowchart TD
 
 ---
 
+## Model Context Protocol (MCP) Integration
+
+For real-time feedback during Infrastructure as Code (IaC) development, see the [FinOps Wizard MCP Server](README_MCP.md) documentation.
+
+This MCP server connects developer IDEs directly to the SaaS Cloud Governance Platform, allowing AI coding assistants to evaluate proposed resource sizing (e.g., VM families, Kubernetes node specs, serverless memory allocation) against historical baselines and corporate policies in real-time, before any code is committed.
+
+---
+
 ## Key Features & Capabilities
 
 ### 1. Interactive Terminal User Interface (TUI)
