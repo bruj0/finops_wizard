@@ -1,0 +1,11 @@
+spec.txt
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+monitoring.db
+*.egg-info/
+dist/
+build/
+.mypy_cache/
+.pyright_cache/

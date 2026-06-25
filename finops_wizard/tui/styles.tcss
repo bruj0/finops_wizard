@@ -1,0 +1,192 @@
+/* FinOps Wizard - Terminal User Interface Stylesheet */
+/* Inspired by Dolphie's aesthetic design system */
+
+* {
+    scrollbar-background: #161e31;
+    scrollbar-background-hover: #161e31;
+    scrollbar-background-active: #161e31;
+    scrollbar-color: #33405d;
+    scrollbar-color-hover: #404f71;
+    scrollbar-color-active: #4f608a;
+    color: #e9e9e9;
+}
+
+Screen {
+    background: #0a0e1b;
+}
+
+/* --- Layout Elements --- */
+.container {
+    padding: 1 2;
+    layout: vertical;
+}
+
+.title {
+    text-align: center;
+    color: #bbc8e8;
+    text-style: bold;
+    margin-bottom: 1;
+}
+
+.subtitle {
+    text-align: center;
+    color: #969aad;
+    margin-bottom: 2;
+}
+
+/* --- Navigation & Menu --- */
+#menu_list {
+    background: #0f1525;
+    border: heavy #252e49;
+    height: 12;
+    margin: 1 4;
+}
+
+/* --- Top Bar --- */
+TopBar {
+    dock: top;
+    background: #192036;
+    height: 1;
+    layout: horizontal;
+    padding: 0 1;
+}
+
+#topbar_title {
+    width: 25%;
+    content-align: left middle;
+}
+
+#topbar_status {
+    color: #bbc8e8;
+    width: 50%;
+    content-align: center middle;
+    text-style: bold;
+}
+
+#topbar_help {
+    width: 25%;
+    content-align: right middle;
+    color: #8f9fc1;
+}
+
+/* --- Dashboard --- */
+.dashboard-grid {
+    layout: grid;
+    grid-size: 2;
+    grid-gutter: 2;
+    height: auto;
+}
+
+.dashboard-panel {
+    background: #0f1525;
+    border: tall #1b233a;
+    padding: 1;
+    height: 18;
+}
+
+.dashboard-panel-header {
+    color: #bbc8e8;
+    text-style: bold;
+    margin-bottom: 1;
+}
+
+/* --- Data Tables --- */
+DataTable {
+    background: #0f1525;
+    margin: 1 0;
+    height: 1fr;
+    border: tall #1b233a;
+}
+
+DataTable > .datatable--odd-row {
+    background: #131a2c;
+}
+
+DataTable > .datatable--even-row {
+    background: #0f1525;
+}
+
+DataTable > .datatable--header {
+    background: transparent;
+    color: #c5c7d2;
+    text-style: bold;
+}
+
+/* --- Progress & Scanning --- */
+#scan_log {
+    background: #05070f;
+    border: tall #1b233a;
+    height: 15;
+    padding: 1;
+    margin-top: 1;
+}
+
+ProgressBar {
+    width: 100%;
+    margin: 1 0;
+}
+
+ProgressBar > #bar > .bar--bar {
+    color: #91abec;
+    background: #3a3f51;
+}
+
+ProgressBar > #bar > .bar--complete {
+    color: #54efae;
+}
+
+/* --- Buttons --- */
+Button {
+    background: #282c42;
+    border-top: tall #54597b;
+    border-bottom: tall #171922;
+    margin: 1 1;
+    width: 20;
+}
+
+Button:hover {
+    background: #383e5c;
+    border-top: tall #69709a;
+}
+
+Button.-primary {
+    background: #192c5b;
+    border-top: tall #425894;
+    border-bottom: tall #151b2b;
+}
+
+Button.-primary:hover {
+    background: #203875;
+    border-top: tall #4a62a4;
+}
+
+/* --- SaaS Bridge --- */
+#saas_card {
+    background: #151d30;
+    border: tall #2d3c5e;
+    padding: 2;
+    margin: 2 4;
+}
+
+/* --- Dialog Modals --- */
+ModalScreen {
+    background: #0d1015 70%;
+    align: center middle;
+}
+
+#dialog_box {
+    background: #0f1525;
+    border: tall #252e49;
+    width: 60;
+    height: auto;
+    padding: 1 2;
+    align: center middle;
+}
+
+#selection_list {
+    background: #0a0e1b;
+    border: tall #1b233a;
+    height: 8;
+    margin: 1 0;
+}
+
