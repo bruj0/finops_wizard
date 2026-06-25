@@ -10,32 +10,41 @@ FinOps Wizard is a local-first, trust-building cloud cost optimization and gover
 flowchart TD
     Start([User / CLI Input]) --> SelectMode{Scan Mode?}
     
-    %% Cloud Mode Path
-    SelectMode -->|Cloud Mode| Phase1C["Phase 1 - Discovery"]
-    Phase1C -->|Query Billing API| Baseline[Retrieve Billing Baseline & Anomalies]
-    Baseline --> Phase2C["Phase 2 - Inventory"]
-    Phase2C -->|Collect General Metrics| TagCoverage[Analyze Tag Coverage & Burn Rates]
-    
-    %% Workloads Mode Path
-    SelectMode -->|Workloads Mode| Phase1W["Phase 1 - Discovery"]
-    Phase1W -->|Scan Footprint| DetectWorkloads[Auto-Detect Kubernetes, Serverless, VMs]
-    DetectWorkloads --> Phase2W["Phase 2 - Inventory"]
-    Phase2W -->|Compile Host Profiles| Utilization[Analyze CPU/Memory & Disk Utilization]
-    
-    %% Shared Pipelining
-    TagCoverage & Utilization --> Phase3["Phase 3 - Analysis & Patching"]
-    
-    subgraph IaC Refactoring
-        Phase3 -->|Walk local IaC target dir| FindTF[Scan .tf Files & Resolve Module Sources]
-        FindTF --> MatchBlocks[Match Waste Items to HCL Blocks]
-        MatchBlocks --> GeneratePatches[Generate Unified Git Diff Patches]
+    subgraph Local TUI & CLI ["Local-First TUI & CLI (Read-Only)"]
+        %% Cloud Mode Path
+        SelectMode -->|Cloud Mode| Phase1C["Phase 1 - Discovery"]
+        Phase1C -->|Query Billing API| Baseline[Retrieve Billing Baseline & Anomalies]
+        Baseline --> Phase2C["Phase 2 - Inventory"]
+        Phase2C -->|Collect General Metrics| TagCoverage[Analyze Tag Coverage & Burn Rates]
+        
+        %% Workloads Mode Path
+        SelectMode -->|Workloads Mode| Phase1W["Phase 1 - Discovery"]
+        Phase1W -->|Scan Footprint| DetectWorkloads[Auto-Detect Kubernetes, Serverless, VMs]
+        DetectWorkloads --> Phase2W["Phase 2 - Inventory"]
+        Phase2W -->|Compile Host Profiles| Utilization[Analyze CPU/Memory & Disk Utilization]
+        
+        %% Shared Pipelining
+        TagCoverage & Utilization --> Phase3["Phase 3 - Analysis & Patching"]
+        
+        subgraph IaC Refactoring ["Local IaC Refactoring"]
+            Phase3 -->|Walk local IaC target dir| FindTF[Scan .tf Files & Resolve Module Sources]
+            FindTF --> MatchBlocks[Match Waste Items to HCL Blocks]
+            MatchBlocks --> GeneratePatches[Generate Unified Git Diff Patches]
+        end
     end
     
-    GeneratePatches --> Phase4["Phase 4 - Monitoring Persistence"]
-    Phase4 -->|Save baseline history| SQLite[(monitoring.db local SQLite Log)]
+    GeneratePatches -->|Local SQLite Log| SQLite[(monitoring.db local SQLite Log)]
     
-    GeneratePatches --> Phase5["Phase 5 - Alerting & Webhooks"]
-    Phase5 -->|Evaluate Governance Rules| Webhook([Trigger Alert Webhook Notify])
+    %% SaaS Platform Path
+    GeneratePatches -->|SaaS Telemetry Sync| SaaSBoundary
+    
+    subgraph SaaS Service ["SaaS Cloud Governance Platform (Continuous)"]
+        SaaSBoundary([SaaS Onboarding Bridge]) --> Phase4["Phase 4 - Continuous Monitoring"]
+        Phase4 --> SaaSDB[(SaaS Centralized Metrics DB)]
+        
+        SaaSBoundary --> Phase5["Phase 5 - Anomaly Alerting & Rules"]
+        Phase5 -->|Evaluate Governance Rules| SlackNotify[Trigger Slack / Webhook Notification]
+    end
 ```
 
 ---
