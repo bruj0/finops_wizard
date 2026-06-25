@@ -2,7 +2,7 @@
 
 ![FinOps Wizard TUI](img/screenshot.png)
 
-FinOps Wizard is a local-first, trust-building cloud cost optimization and governance platform. It features an interactive terminal user interface (TUI) and a headless CLI to discover workloads, scan resource utilization waste, generate Terraform refactoring patches, persist results locally, and alert on governance violations.
+FinOps Wizard is a local-first, cloud cost optimization and governance platform. It features an interactive terminal user interface (TUI) and a headless CLI to discover workloads, scan resource utilization waste, generate Terraform refactoring patches, persist results locally, and alert on governance violations.
 
 ## Application Workflow
 
